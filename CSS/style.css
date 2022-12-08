@@ -1,0 +1,61 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    background-color: whitesmoke;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+}
+
+.container {
+    padding: 2rem 7%;
+}
+
+img {
+    width: 100%;
+    object-fit: cover;
+    height: 200px;
+}
+
+.countries .container {
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(300px, 1fr) );
+    gap: 2rem;
+}
+
+.country {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+
+.country-image {
+    flex: 1;
+}
+
+.country-info {
+    flex: 1;
+    padding: 1rem;
+}
+
+.country-info div {
+    font-size: 1.5rem;
+    font-weight: 500;
+    padding: 0.5rem;
+}
+
+.country-name{
+    font-weight:b ;
+}
