@@ -12,10 +12,9 @@ function getCountryInfo() {
 function displayCountryInfo(infos) {
     let countryInfo = ""
     infos.forEach((info,i)=> {
-
         countryInfo += ` 
 <div class="country">
-<a href="description.html" class="country-image" onclick=moreDetails(${i})>
+<a class="country-image" onclick=moreDetails(${i})>
     <img src="${info.flags.svg}" class="country-img" alt="">
 </a>
 <div class="country-info">
@@ -79,16 +78,22 @@ getCountryInfo()
 function moreDetails(index){
     fetch("https://restcountries.com/v3.1/all")
     .then(res => res.json())
-    .then(data =>displayCountryMoreInfo(data[index].name.common))
+    .then(data =>{
+    displayCountryMoreInfo(data[index].name.common)
+    console.log(data[index].name.common)
+    localStorage.setItem("countryName",JSON.stringify(data[index].name.common))    
+    window.location="./description.html" 
+})
 }
 
 function displayCountryMoreInfo(country){
 
     let countryName=country
+    let newCountryInfo=""
     fetch(`https://restcountries.com/v3.1/name/${countryName}`)
     .then(res=>res.json())
     .then(data=>{
-        let newCountryInfo=""
+        
         let name=data[0].name.common
         let nativeName=Object.entries(data[0].name.nativeName)[0][0]
         let population=data[0].population
@@ -100,6 +105,7 @@ function displayCountryMoreInfo(country){
         let borders=data[0].borders
 
         newCountryInfo+=`
+
         <div class="countryInfos">
         <div class="country-image">
             <img src="${data[0].flags.svg}" alt="">
@@ -119,19 +125,18 @@ function displayCountryMoreInfo(country){
                     <div>Languages: bla, bla, bla</div>
                 </div>
             </div>
-            <div class="borders">
+            <div class="bordersDiv">
                 <div>
                     Border Countries:
                 </div>
                 <div class="borders-btns">
-                    <button class="btn">France</button>
-                    <button class="btn">Germany</button>
-                    <button class="btn">Spain</button>
+                    <button class="btn">$</button>
                 </div>
             </div>
         </div>
     </div>
         `
+        console.log(name)
         countryDetailes.appendChild(newCountryInfo)
     })
 
