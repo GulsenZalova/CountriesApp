@@ -20,19 +20,19 @@
     <main>
         <div class="input-area">
             <div class="container">
-                <input type="text" placeholder="Search for a country">
-                <select name="country" id="country">
+                <input type="text" placeholder="Search for a country" class="filterNameInput">
+                <select name="selectRegions" id="selectRegions" onchange="changeRegion(this)">
                     <option value="">Filter by region</option>
-                    <option value="1">Africa</option>
-                    <option value="2">America</option>
-                    <option value="3">Asia</option>
-                    <option value="4">Europe</option>
+                     <!--  <option value="africa">Africa</option>
+                    <option value="america">America</option>
+                    <option value="asia">Asia</option>
+                    <option value="Europe">Europe</option> -->
                 </select>
             </div>
         </div>
         <div class="countries">
             <div class="container">
-                <div class="country">
+                 <!-- <div class="country">
                     <div class="country-image">
                         <img src="./image/flag.png" class="country-img" alt="">
                     </div>
@@ -42,7 +42,7 @@
                         <div>Region: <span class="country-region">Europe</span></div>
                         <div>Capital: <span class="country-capital">Baku</span></div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </main>

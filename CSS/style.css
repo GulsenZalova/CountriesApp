@@ -2,23 +2,39 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+
 }
 
 html {
     font-size: 62.5%;
 }
-
+a{
+    text-decoration: none;
+    color: black;
+}
 body {
     background-color: whitesmoke;
 }
-
-.header {
+main{
+    position: relative;
+    top:10rem;
+}
+.header{
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+    top: 0;
+    box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.75);
+}
+.header .container{
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: white;
 }
-
+.header-info,.header-logo{
+    font-size: 2rem;
+}
 .container {
     padding: 2rem 7%;
 }
@@ -28,7 +44,31 @@ img {
     object-fit: cover;
     height: 200px;
 }
-
+.input-area .container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.input-area input{
+    width: 35%;
+    padding: 1.5rem ;
+    border: none;
+    box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.75);
+    outline: none;
+}
+.input-area select{
+    padding: 1.5rem;
+    background-color: white;
+    border: none;
+    box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.75);
+    outline: none;
+}
+.input-area select option{
+    display: inline-flex;
+    padding: 2rem;
+    outline: none;
+    margin: 1rem;
+}
 .countries .container {
     display: grid;
     grid-template-columns: repeat( auto-fit, minmax(300px, 1fr) );
@@ -58,4 +98,76 @@ img {
 
 .country-name{
     font-weight:b ;
+}
+
+.countryDetailes{
+    position: relative;
+    top: 10rem;
+    width: 100%;
+}
+.countryDetailes .container{
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+}
+.btn-back{
+   display: inline-block;
+   width: 14rem;
+   height: 4rem;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.75);
+   font-size: 2rem;
+}
+
+.countryInfos{
+    display: flex;
+}
+.countryInfos .country-image{
+    width: 50%;
+    display: flex;
+
+}
+.countryInfos .country-image img{
+    width: 100%;
+}
+.countryInfos .country-info{
+    width: 50%;
+}
+.country-details{
+    display: flex;
+
+}
+.country-info{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+.borders{
+    display: flex;
+    align-items: center;
+}
+.borders-btns{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+.borders-btns .btn{
+    padding:0.5rem 1rem;
+    background-color: transparent;
+    border: none;
+    box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.75);
+}
+/* Responsive Design */
+
+@media (max-width:768px) {
+    html{
+        font-size: 55%;
+    }
+}
+@media (max-width:529px) {
+    html{
+        font-size: 50%;
+    }
 }
