@@ -71,7 +71,7 @@ img {
 }
 .countries .container {
     display: grid;
-    grid-template-columns: repeat( auto-fit, minmax(300px, 1fr) );
+    grid-template-columns: repeat( auto-fit, minmax(30rem, 1fr) );
     gap: 2rem;
 }
 
@@ -80,21 +80,18 @@ img {
     flex-direction: column;
     background-color: white;
 }
-
-.country-image {
-    /* flex: 1; */
+.country-info .countryName{
+    font-size: 1.8rem;
+    font-weight: bold;
 }
-
 .country-info{
-    /* flex: 1; */
-    padding: 1rem;
     width: 100%;
 }
 
 .country-info div {
     font-size: 1.5rem;
     font-weight: 500;
-    padding: 0.5rem;
+    padding: 0.5rem 0;
 }
 
 .countryDetailes{
@@ -120,26 +117,57 @@ img {
 
 .countryInfos{
     display: flex;
+    align-items: center;
+    justify-content:center;
+    gap: 10rem;
 }
 .countryInfos .country-image{
     width: 50%;
-    display: flex;
-
+    height: 60vh;
 }
 .countryInfos .country-image img{
     width: 100%;
+    object-fit: cover;
+    display: flex;
+    align-items: center;
+    height: 100%;
 }
 .countryInfos .country-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
     width: 50%;
+    height: 60vh;
+    padding: 1rem;
+}
+
+.country .country-image img{
+ width: 100%;
+ height: 20rem;
+}
+.country .country-info{
+    padding: 1rem;
 }
 .country-details{
     display: flex;
 
+    justify-content: space-between;
 }
-.country-info{
+.country-details div{
+    font-size: 1.5rem;
+    font-weight: bold;
+    /* flex-direction: column; */
+}
+.country-details .country-detail{
     display: flex;
     flex-direction: column;
-    width: 50%;
+    gap: 2rem;
+    justify-content: center;
+}
+.country-details span{
+    font-size: 1.5rem;
+    font-weight: lighter;
 }
 .borders{
     display: flex;
@@ -176,14 +204,34 @@ img {
 }
 .errorContent{
     font-size: 30px;
-    color: red;
 }
 /* Responsive Design */
 
-@media (max-width:768px) {
+@media (max-width:992px) {
     html{
         font-size: 55%;
     }
+    .countryInfos{
+        flex-direction: column;
+    }
+    .countryInfos .country-image{
+        width: 100%;
+    }
+    .countryInfos .country-info{
+        width: 100%;
+    }
+    .countryInfos .country-image, .countryInfos .country-info{
+        height: 40vh;
+        gap: 1rem;
+
+    }
+    
+}
+@media (max-width:786px) {
+    .country-details{
+        flex-direction: column;
+    }
+    
 }
 @media (max-width:529px) {
     html{

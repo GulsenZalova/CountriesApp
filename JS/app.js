@@ -2,6 +2,7 @@ let countriesContainer = document.querySelector(".countries .container ")
 let countryDetailes = document.querySelector(".countryDetailes .container")
 let filterNameInput = document.querySelector(".filterNameInput")
 let selectRegions = document.querySelector("#selectRegions")
+let option=document.querySelector(".option")
 
 function getCountryInfo() {
     fetch("https://restcountries.com/v3.1/all")
@@ -41,10 +42,10 @@ filterNameInput.addEventListener("input", function () {
             } else {
                 getData()
             }
-
         })
     }else{
         getCountryInfo()
+        
     }
 })
  function getData (){
@@ -52,16 +53,17 @@ filterNameInput.addEventListener("input", function () {
     fetch(`https://restcountries.com/v3.1/all`)
         .then(res => res.json())
         .then(data => {
-            let filteredCountryList = [];
             data.forEach(function (element) {
+                let filteredCountryList = [];
                 if (filterNameInput.value.length> 0) {
                     let filterName = filterNameInput.value;
                     if (element.name.common.toLowerCase().includes(filterName.toLowerCase())) {
-                        filteredCountryList.push(element);
+                        if(element.region==region){
+                             filteredCountryList.push(element);
+                        }
+                            
                     }
-                } else {
-                    filteredCountryList = data;
-                }
+                }  
             })
             displayCountryInfo(filteredCountryList);
         })
@@ -88,20 +90,45 @@ function displayRegions() {
             selectRegions.appendChild(option)
         })
     })
-
 }
+let region
 async function changeRegion(e) {
-    let region
-    await getRegions().then(res => { region = res[e.value] })
+    await getRegions().then(res => {
+         {region = res[e.value] }})
     fetch(` https://restcountries.com/v3.1/region/${region}`)
         .then(res => res.json())
-        .then(data => displayCountryInfo(data))
+        .then(data => { 
+        displayCountryInfo(data)
+        })
 }
 
+function getData (){
+    let filteredCountryList = [];
+    countriesContainer.innerHTML = "";
+    fetch(`https://restcountries.com/v3.1/all`)
+        .then(res => res.json())
+        .then(data => {
+            data.forEach(function (element) {
+                
+                if (filterNameInput.value.length> 0) {
+                    let filterName = filterNameInput.value;
+                    if (element.name.common.toLowerCase().includes(filterName.toLowerCase())) {
+                        if(element.region==region){
+                             filteredCountryList.push(element);
+                        }
+                            
+                    }else{
+                        countriesContainer.innerHTML = `<div class="errorContainer"><span class="errorContent">No İnformation Found</span></div>`
+                    }
+                }  
 
+            })
+            console.log(region)
+            displayCountryInfo(filteredCountryList);
+        })
+}
 displayRegions()
 getCountryInfo()
-
 
 function moreDetails(index) {
     fetch("https://restcountries.com/v3.1/all")
