@@ -2,8 +2,6 @@ let countriesContainer = document.querySelector(".countries .container ")
 let countryDetailes = document.querySelector(".countryDetailes .container")
 let filterNameInput = document.querySelector(".filterNameInput")
 let selectRegions = document.querySelector("#selectRegions")
-let option=document.querySelector(".option")
-
 function getCountryInfo() {
     fetch("https://restcountries.com/v3.1/all")
         .then(res => res.json())
@@ -45,29 +43,9 @@ filterNameInput.addEventListener("input", function () {
         })
     }else{
         getCountryInfo()
-        
+    
     }
 })
- function getData (){
-    countriesContainer.innerHTML = "";
-    fetch(`https://restcountries.com/v3.1/all`)
-        .then(res => res.json())
-        .then(data => {
-            data.forEach(function (element) {
-                let filteredCountryList = [];
-                if (filterNameInput.value.length> 0) {
-                    let filterName = filterNameInput.value;
-                    if (element.name.common.toLowerCase().includes(filterName.toLowerCase())) {
-                        if(element.region==region){
-                             filteredCountryList.push(element);
-                        }
-                            
-                    }
-                }  
-            })
-            displayCountryInfo(filteredCountryList);
-        })
-}
 async function getRegions() {
     let resgions = []
     await fetch("https://restcountries.com/v3.1/all")
@@ -85,6 +63,7 @@ function displayRegions() {
     getRegions().then(res => {
         res.forEach((element, index) => {
             let option = document.createElement("option")
+            option.classList.add(".option")
             option.innerHTML = element
             option.value = index
             selectRegions.appendChild(option)
@@ -98,10 +77,10 @@ async function changeRegion(e) {
     fetch(` https://restcountries.com/v3.1/region/${region}`)
         .then(res => res.json())
         .then(data => { 
+            console.log(e.value)
         displayCountryInfo(data)
         })
 }
-
 function getData (){
     let filteredCountryList = [];
     countriesContainer.innerHTML = "";
@@ -109,21 +88,21 @@ function getData (){
         .then(res => res.json())
         .then(data => {
             data.forEach(function (element) {
-                
-                if (filterNameInput.value.length> 0) {
-                    let filterName = filterNameInput.value;
-                    if (element.name.common.toLowerCase().includes(filterName.toLowerCase())) {
-                        if(element.region==region){
-                             filteredCountryList.push(element);
+                    if (filterNameInput.value.length> 0) {
+                        let filterName = filterNameInput.value;
+                        if(selectRegions.value=="All"){
+                            if (element.name.common.toLowerCase().includes(filterName.toLowerCase())) {
+                                     filteredCountryList.push(element);       
+                            } 
+                        }else{
+                            if (element.name.common.toLowerCase().includes(filterName.toLowerCase())) {
+                                if((element.region==region)){
+                                     filteredCountryList.push(element);
+                                }    
+                            }
                         }
-                            
-                    }else{
-                        countriesContainer.innerHTML = `<div class="errorContainer"><span class="errorContent">No İnformation Found</span></div>`
-                    }
-                }  
-
+                    }  
             })
-            console.log(region)
             displayCountryInfo(filteredCountryList);
         })
 }
@@ -138,4 +117,5 @@ function moreDetails(index) {
             localStorage.setItem("countryName", JSON.stringify(data[index].name.common))
             window.location = "./description.html"
         })
+
 }
